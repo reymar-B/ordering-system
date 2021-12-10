@@ -20,17 +20,16 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
         </div>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+        </script>
+        <script src="{{ asset('js/admin.js') }}" defer></script>
     </body>
 </html>
