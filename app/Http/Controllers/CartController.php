@@ -21,20 +21,17 @@ class CartController extends Controller
         {
             $order = $order;
         }
-        //$price = $order->menu->pluck('price');
-         $a = $order;
 
-        $sum = array_reduce($a->menu, function($i, $obj)
+        $price = $order ? $order->menu->pluck('price'):0;
+
+        $myArray = json_decode(json_encode($price), true);
+
+        $sum = array_reduce($myArray, function($i, $obj)
         {
-            return $i += $obj->price;
+            return $i += $obj;
         });
-        echo $sum;
 
-        //$a = preg_replace('('.'|\*|\"|\]|\[)','',$price);
-
-
-
-        //return view('cart')->with('orders', $orders);
+        return view('cart')->with('orders', $orders)->with('sum', $sum);
     }
 
 }
