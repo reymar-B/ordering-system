@@ -17,21 +17,25 @@ class CartController extends Controller
 
         $orders = Order::with('menu')->where('isServed', 0)->get();
 
-        foreach($orders as $order)
-        {
-            $order = $order;
+        if($orders){
+            dd($orders);
+        }else{
+
+            foreach($orders as $order)
+            {
+                $order = $order;
+            }
+
+            $price = $order ? $order->menu->pluck('price'):0;
+
+            $myArray = json_decode(json_encode($price), true);
+
+            $sum = array_reduce($myArray, function($i, $obj)
+            {
+                return $i += $obj;
+            });
+            return view('cart')->with('orders', $orders)->with('sum', $sum);
         }
-
-        $price = $order ? $order->menu->pluck('price'):0;
-
-        $myArray = json_decode(json_encode($price), true);
-
-        $sum = array_reduce($myArray, function($i, $obj)
-        {
-            return $i += $obj;
-        });
-
-        return view('cart')->with('orders', $orders)->with('sum', $sum);
     }
 
 }
