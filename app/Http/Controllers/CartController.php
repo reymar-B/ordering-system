@@ -17,9 +17,10 @@ class CartController extends Controller
 
         $orders = Order::with('menu')->where('isServed', 0)->get();
 
-        if($orders){
-            dd($orders);
-        }else{
+        if(count($orders) == 0)
+        {
+            dd("cart empty");
+        }
 
             foreach($orders as $order)
             {
@@ -35,7 +36,6 @@ class CartController extends Controller
                 return $i += $obj;
             });
             return view('cart')->with('orders', $orders)->with('sum', $sum);
-        }
     }
 
 }
