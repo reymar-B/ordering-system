@@ -32,6 +32,6 @@
         <div>
             <p class="text-9xl ...">online ordering system..</p>
         </div>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     </body>
 </html>

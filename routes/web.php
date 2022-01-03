@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group( function(){
 
-    Route::get('cart',[CartController::class, 'myCart'])->name('cart');
+    Route::get('cart',[CartController::class, 'showCart'])->name('cart');
     Route::post('addQty/{id}',[CartController::class, 'addQty'])->name('addQty');
     Route::post('minusQty/{id}',[CartController::class, 'minusQty'])->name('minusQty');
 

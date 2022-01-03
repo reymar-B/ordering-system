@@ -31,8 +31,13 @@
                 @endforeach
             @endforeach
         </div>
-        <div class="flex justify-center bg-green-500">
-           Total: {{$sum}}
+        <div class="flex justify-center bg-green-400">
+           Total: {{$sum}} {{$tax}}
+        </div>
+        <div class="flex justify-center bg-red-400">
+            <button>
+                checkout
+            </button>
         </div>
     </div>
 </x-app-layout>

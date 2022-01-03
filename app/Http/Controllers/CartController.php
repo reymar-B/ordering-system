@@ -12,30 +12,51 @@ use function PHPUnit\Framework\returnSelf;
 class CartController extends Controller
 {
 
-    public function myCart()
+    public function getOrderLists()
     {
 
         $orders = Order::with('menu')->where('isServed', 0)->get();
 
-        if(count($orders) == 0)
+        return $orders;
+
+    }
+
+
+    public function showCart()
+    {
+
+        $orders = $this->getOrderLists();
+
+        $sum = $this->convertToArray($orders, 'price');
+
+        $tax = $this->convertToArray($orders, 'tax');
+
+        return view('cart')->with('orders', $orders)->with('sum', $sum)->with('tax', $tax);
+    }
+
+
+    public function convertToArray($items, $value)
+    {
+
+        if(count($items) == 0)
         {
-            dd("cart empty");
+            return 0;
         }
 
-            foreach($orders as $order)
-            {
-                $order = $order;
-            }
+        foreach($items as $item)
+        {
+            $item = $item ? $item->menu->pluck($value):0;
 
-            $price = $order ? $order->menu->pluck('price'):0;
+            $myArray = json_decode(json_encode($item), true);
 
-            $myArray = json_decode(json_encode($price), true);
-
-            $sum = array_reduce($myArray, function($i, $obj)
+            $itemArray = array_reduce($myArray, function($i, $obj)
             {
                 return $i += $obj;
             });
-            return view('cart')->with('orders', $orders)->with('sum', $sum);
+        }
+
+        return $itemArray;
+
     }
 
 }

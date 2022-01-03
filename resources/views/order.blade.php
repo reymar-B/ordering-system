@@ -34,7 +34,7 @@
                 @foreach ($menus as $menu)
                 <form method="POST" action="orders">
                     @csrf
-                    <div class="d-flex bg-red-100 ">
+                    <div class="d-flex bg-red-100">
                         <input type="hidden" name="menuId" value="{{ $menu->id }}">
                         <button type="submit">
                             <div>{{ $menu->menu_name }}</div>
